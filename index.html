@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Convert decimal latitude and longitude to compact degrees-and-whole-minutes coordinates." />
+  <title>Latitude & Longitude Converter</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="shell">
+    <section class="card" aria-labelledby="page-title">
+      <div class="heading">
+        <span class="eyebrow">Coordinate tool</span>
+        <h1 id="page-title">Latitude & Longitude Converter</h1>
+        <p>Convert decimal coordinates into compact whole-minute format, such as 2125N 12230W.</p>
+      </div>
+
+      <form id="converter-form" novalidate>
+        <div class="field-grid">
+          <label class="field" for="latitude">
+            <span>Latitude</span>
+            <small>Enter a value from −90 to 90</small>
+            <input id="latitude" name="latitude" type="number" inputmode="decimal" step="any" min="-90" max="90" placeholder="32.7767" autocomplete="off" />
+            <span class="error" id="latitude-error" aria-live="polite"></span>
+          </label>
+
+          <label class="field" for="longitude">
+            <span>Longitude</span>
+            <small>Enter a value from −180 to 180</small>
+            <input id="longitude" name="longitude" type="number" inputmode="decimal" step="any" min="-180" max="180" placeholder="-97.3308" autocomplete="off" />
+            <span class="error" id="longitude-error" aria-live="polite"></span>
+          </label>
+        </div>
+
+        <div class="actions">
+          <button class="primary" type="submit">Convert</button>
+          <button class="secondary" id="clear-button" type="button">Clear</button>
+        </div>
+      </form>
+
+      <section class="results" aria-labelledby="results-title">
+        <div class="results-heading">
+          <h2 id="results-title">Converted coordinates</h2>
+          <button class="copy-all" id="copy-all" type="button" disabled>Copy both</button>
+        </div>
+
+
+        <div class="combined-result">
+          <span class="result-label">Combined format</span>
+          <output id="combined-result">—</output>
+        </div>
+
+        <div class="result-row">
+          <div>
+            <span class="result-label">Latitude</span>
+            <output id="latitude-result">—</output>
+          </div>
+          <button class="icon-button" id="copy-latitude" type="button" aria-label="Copy latitude" disabled>Copy</button>
+        </div>
+
+        <div class="result-row">
+          <div>
+            <span class="result-label">Longitude</span>
+            <output id="longitude-result">—</output>
+          </div>
+          <button class="icon-button" id="copy-longitude" type="button" aria-label="Copy longitude" disabled>Copy</button>
+        </div>
+
+        <p class="status" id="copy-status" aria-live="polite"></p>
+      </section>
+
+      <details class="help">
+        <summary>How the conversion works</summary>
+        <p>The whole-number portion becomes degrees. The decimal portion is multiplied by 60 and rounded to the nearest whole minute. Minutes are always shown with two digits, followed by N/S or E/W. If rounding produces 60 minutes, the app carries it into the next degree.</p>
+      </details>
+    </section>
+
+    <footer>Runs entirely in your browser. No coordinates are uploaded or stored.</footer>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
